@@ -17,3 +17,6 @@ build/
 *.log
 *.tmp
 *.user
+
+# Ignore the centralized build output directory
+output/

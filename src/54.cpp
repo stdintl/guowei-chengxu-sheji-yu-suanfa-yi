@@ -11,21 +11,50 @@
 输出一行一个整数，表示满足条件的最小总花费。*/
 
 #include <iostream>
+#include <vector>
 using namespace std;
 
+struct A {
+    int a;
+    int b;
+    int cmp;
+};
+void bubble (A men[], int m);
+
 int main () {
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
     int m;
-    int a, b;
-    int sum = 0;
     cin >> m;
-    for (; m>0; m--) {
-        cin >> a >> b;
-        if (a>b)
-            sum += b;
-        else 
-            sum += a;
+    vector<A>men(m);
+    for (int i=0; i<m; i++) {
+        cin >> men[i].a >> men[i].b;
+        men[i].cmp = men[i].b - men[i].a;
     }
+
+    bubble (&men[0], m);
+    int sum = 0;
+    for (int i=0; i<m/2; i++) 
+        sum += men[i].b;
+    for (int i=m/2; i<m; i++)
+        sum += men[i].a;
+
     cout << sum << endl;
 
     return 0;
 }
+
+//冒泡排序
+void bubble (A men[], int m) {
+    for (int i=m-1; i>0; i--) {
+        for (int j=0; j<i; j++) {
+            if (men[j].cmp > men[j+1].cmp) {
+                A temp = men[j];
+                men[j] = men[j+1];
+                men[j+1] = temp;
+            }
+        }
+    }
+}
+

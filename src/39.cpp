@@ -1,39 +1,22 @@
-/*给定一个整数 n，请你构造一个恰好含有 n 个特殊字符的字符串，或报告无解。
+/*写出函数中缺失的部分，使得函数返回值为一个整数,该整数的左边i位是n的左边i位取反，其余位和n相同
+请使用【一行代码】补全bitManipulation3函数使得程序能达到上述的功能*/
 
-称一个字符是特殊的，当且仅当与它相邻的字符中恰好有一个与它相同。
-
-输入描述
-
-输入格式
-第一行一个整数 t，代表测试组数。
-
-接下来 t 行，每行一个整数 n，意义如题意。
-
-输出格式
-若有解，输出 YES，并在下一行输构造的最短字符串；若无解，输出 NO。*/
 #include <iostream>
 using namespace std;
 
-int main () {
-    int t, n;
-    cin >> t;
-    for (; t>0; t--) {
-        cin >> n;
-        if (n%2 != 0) 
-            cout << "NO" << '\n';
-        else {           
-            cout << "YES" << '\n';
-            int i = n/2;
-            for (int j=1; j<=i; j++) {
-                if (j%2 != 0) 
-                    cout << "AA";
-                else 
-                    cout << "BB";
-            }
-        } 
-        if (n%2 == 0)
-            cout << '\n';
-    }
-    
-    return 0;
+int bitManipulation3(int n, int i) {
+    return n ^ ((-1)>>(32-i)<<(32-i));
+    //return n ^ ~(~(unsigned)0 >> i);
 }
+
+int main() {
+	int t, n, i;
+	cin >> t;
+	while (t--) {
+		cin >> n >> i;
+		cout << bitManipulation3(n, i) << endl;
+	}
+	return 0;
+}
+
+//相信自己,敢于创新,探索一切可能;

@@ -1,34 +1,34 @@
-/*给定一个只包含小写字母的字符串，请你找到第一个仅出现一次的字符。如果没有，输出no。
+/*道路总长度为 L（起点到终点的距离）。起点和终点之间原本有 N 个路标，每个路标与起点的距离为
+D_i（严格递增，且 0 < D_i < L）。薇尔莉特可以从起点出发，每次跳到下一个路标或终点，
+她可以移除至多 M 个路标（不能移除起点和终点）。
+移除后，她将按顺序依次经过剩余的路标（包括起点和终点），并计算相邻两点之间的距离。
+她希望这些距离中的最小值尽可能大。请输出这个最大值。
+第一行三个整数 L, N, M，含义如上。
+接下来 N 行，每行一个整数 D_i，表示第 i 个路标与起点的距离。
+数据范围：1 ≤ L ≤ 1e9，0 ≤ M ≤ N ≤ 50000，0 < D_i < L，且 D_i 严格递增。*/
 
-输入
-一个字符串，长度小于100000。
-输出
-输出第一个仅出现一次的字符，若没有则输出no。*/
-
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 int main () {
-    const int num = 100000;
-    char str [num];
-    cin >> str;
-    int i=0;
-    for (; str[i]; i++) {
-        int j = 0;
-        for (; str[j]; j++) {
-            if (str[i]==str[j] && i!=j)
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    int l, m, n;
+    cin >> l >> n >> m;
+    vector <int> num(n+2);
+    for (int i=1; i<=n; i++) 
+        cin >> num[i];
+    num[n+1] = l;    
+    int diff = l;
+    int count = 0;
+    while (1) {
+        for (int i=1; i<=n+1; i++) {
+            if (num[i]-num[i-1] > diff)
+                count ++;
+            if (count > m)
                 break;
         }
-        if (str[j]==0) {
-            cout << str[i] << endl;
-            return 0;
-        }
-    } 
-    if (str[i] == 0) {
-        cout << "no" << endl;
+        int te
     }
-
-    return 0;
 }
-
-//学会调试和改错;

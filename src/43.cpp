@@ -1,33 +1,64 @@
-/*小z认为自己现在位于坐标 (0,0)，他想要到达坐标 (x,y) 的餐盘处。
+/*zzh会在自己的收纳仓中出n堆石子，并标上序号，n 堆石子的数量为 a1,a2,…,an 的石子，堆呈圆形排列。
 
-为了到达那里，小z 采取大步行走。从任意点 (a,b)，一次大步可以移动到：
+玩家从第一堆开始，顺时针依次从一堆中取出一些正数的石头。如果一个玩家在回合中从第 i 堆取石头，另一个玩家在下一轮从 ((imodn)+1) 堆取石头。
 
-(a+2,b) 或 (a,b+2)
-但在整个旅程中，小z 最多只能走一步小步。一次小步可以移动到：
+如果玩家在回合中无法取走任何石头（因为堆是空的），他就输了。
 
-(a+1,b) 或 (a,b+1)
+假设 Mike 和 Joe 都采取最优策略，那么谁会赢？
 
-输入格式
-第一行包含一个整数 t（1≤t≤100），表示测试用例的数量。
-每个测试用例包含两个整数 x 和 y （1≤x,y≤10），表示餐盘的坐标。
-对于每个测试用例，如果 小z 能到达餐盘，请输出 “YES”，否则输出 “NO”。*/
+请注意，每次一名玩家至少可以拿走一枚石头，最多可以拿走这一堆石头。
 
-#include <iostream>
+输出描述
+
+对于每组数据，在输出获胜者，Mike 或 Joe*/
+
+#include <bits/stdc++.h>
 using namespace std;
 
 int main () {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
     int t;
     cin >> t;
     for (; t>0; t--) {
-        int x, y;
-        cin >> x >>y;
-        if (x%2==1 && y%2==1) 
-            cout << "NO" << endl;
-        else 
-            cout << "YES" << endl;
-    }
+        int n;
+        cin >> n;
+        vector <int> num(n);
+        for (int i=0; i<n; i++)
+            cin >> num[i];
+        string win;
+        
+        if (n%2 == 1) 
+            win = "Mike";
+        
+        else {
+            multiset <int> mike;
+            multiset <int> joe;
+            int min1, min2;
+            for (int i=0; i<n-1; i++) {
+                mike.insert (num[i]);
+                joe.insert (num[i+1]);
+            }
+            auto i = mike.begin();
+            auto j = joe.begin();
+            for (; i!=mike.end(); i++,j++) {
+                if (*i != *j) {
+                    min1 = *i;
+                    min2 = *j;
+                    break;
+                }
+            }
+            if (i == mike.end())
+                win = "Joe";
+            else {
+                if (min1 < min2)
+                    win = "Joe";
+                else
+                    win = "Mike";
+            }
 
+        }
+        cout << win << endl;
+    }
     return 0;
 }
+
+//游龙

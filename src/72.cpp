@@ -11,28 +11,27 @@
 using namespace std;
 
 struct A {
-    int a;
-    int b;
+    long long a;
+    long long b;
 };
 
 int main () {
     int n;
     cin >> n;
-    vector <A> money(n);
-    for (int i=0; i<n; i++) 
+    vector <A> money(n+10);
+    vector <A> sum(n+10);
+    for (int i=1; i<=n; i++) {
         cin >> money[i].a >> money[i].b;
+        sum[i].a = sum[i-1].a + money[i].a;
+        sum[i].b = sum[i-1].b + money[i].b;
+    }
 
     int m;
     cin >> m;
     for (int i=0; i<m; i++) {
         int l, r;
-        int suma=0, sumb=0;
         cin >> l >> r;
-        for (int j=l-1; j<r; j++) { // 题目中的 l、r 是从 1 开始计数，所以需要转成 0-based 下标
-            suma += money[j].a;
-            sumb += money[j].b;
-        }
-        cout << suma << ' ' << sumb << endl;
+        cout << sum[r].a - sum[l-1].a<< ' ' << sum[r].b - sum[l-1].b << endl;
     }
 
     return 0;

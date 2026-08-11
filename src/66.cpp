@@ -14,17 +14,16 @@ int main () {
     int count = 0;
 
     //(转化为)取a,b最小公因数;
-    int i=1;
-    for (;;i++) {
-        if (a*i%b == 0) 
-            break;
+    if (a < b) {
+        int temp = a;
+        a = b;
+        b = temp;
     }
+    int k = a;
+    for (; k%b; k+=a);
 
-    int x = a*i/b;
-    if (x > i)
-        cout << x << endl;
-    else
-        cout << i << endl;
-
+    int x = k/a - 1;
+    int y = k/b - 1;
+    cout << x+y << '\n';
     return 0;
 }

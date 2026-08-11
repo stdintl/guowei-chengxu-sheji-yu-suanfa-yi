@@ -7,83 +7,41 @@
 随后 K 行，按 W 升序排列输出 W 和 H；若 W 相同，则按 H 升序排列。
 注意： 同样的尺寸（如 5×5）只算一种，别写重了。*/
 
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-struct A {
+
+struct room {
     int x;
     int y;
 };
-
+bool cmp (room a, room b){
+        if (a.x != b.x)
+            return a.x < b.x;
+        else
+            return a.y < b.y;
+    }
 int main () {
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int T;
-    cin >> T;
-    A way[12]={};
-    int num[4];
-    int sum[6];
-       
-    for (; T>0; T--) {
-        int su = 0;
-        for (int i=0; i<4; i++) {
-            cin >> num[i];
-            su += num[i];
+    int t;
+    cin >> t;
+    for (; t>0; t--) {
+        int a, b, c, d;
+        cin >> a >> b >> c >> d;
+        room way[6] = {{a+b,c+d}, {a+c,b+d}, {a+d,b+c}, {c+d,a+b}, {b+d,a+c}, {b+c,a+d}};
+
+        sort (way, way+6, cmp);
+        int count = 1;
+        for (int i=1; i<=5; i++) {
+            if (way[i].x != way[i-1].x && way[i].y != way[i-1].y)
+                count ++;
         }
 
-    //求可能的二数之和
-    int k = 0;
-    for (int i=0; i<3; i++)
-        for (int j=i+1; j<4; j++) {
-            sum[k] = num[i] + num[j];
-            k++;
-        }
-
-    //求组合数
-    k = 0;
-    int count = 0;
-    for (int i=0; i<6; i++) {
-        if (sum[i] == su/2.0) {
-            count ++;
-            way[k].x = way[k].y = sum[i];
-            k++;
-        }
-        else {
-            count += 2;
-            way[k].x = sum[i];
-            way[k].y = su - sum[i];
-            k++;
-            way[k].y = sum[i];
-            way[k].x = su - sum[i];
-            k++;
+        cout << count << '\n' << way[0].x << ' ' << way[0].y;
+        for (int i=1; i<=5; i++) {
+            if (way[i].x != way[i-1].x && way[i].y != way[i-1].y)
+                cout << way[i].x << way[i].y << '\n';
         }
     }
-    
-
-        //排序
-        for (int i=count-1; i>0; i--) {
-            for (int j=0; j<i; j++) {
-                if (way[j].x < way[j+1].x) {
-                    A temp = way[j];
-                    way[j] = way[j+1];
-                    way[j+1] = temp; 
-                }
-            }
-        }
-        for (int i=0; i<count-2; i++) {
-            if (way[i].x == way[i+1].x && way[i].y>way[i+1].y) {
-                A temp = way[i];
-                way[i] = way[i+1];
-                way[i+1] = temp; 
-            }
-        }
-
-        cout << count << endl;
-        for (int i=0; i<count; i++) {
-            cout << way[i].x << ' ' << way[i].y << endl;
-        }
-    }
-    
-    return 0;
 }
-

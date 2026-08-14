@@ -2,14 +2,22 @@
 using namespace std;
 
 int main () {
-    const int num = 100000;
-    char str [num];
-    cin >> str;
-    int i=0;
-    for (; str[i]; i++) {
-        int j = 0;
-        for (; str[j]; j++) {
-            if (str[i]==str[j] && i!=j)
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    int l, m, n;
+    cin >> l >> n >> m;
+    vector <int> num(n+2);
+    for (int i=1; i<=n; i++) 
+        cin >> num[i];
+    num[n+1] = l;    
+    int diff = l;
+    int count = 0;
+    while (1) {
+        for (int i=1; i<=n+1; i++) {
+            if (num[i]-num[i-1] > diff)
+                count ++;
+            if (count > m)
                 break;
         }
         if (str[j]==0) {

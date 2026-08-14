@@ -15,16 +15,32 @@ sk = * 的所有 i<k<j 。
 using namespace std;
 
 int main () {
-    int n;
-    cin >> n;
+    ios::sync_with_stdio(false);
+    cin.tie(0);
 
-    vector <char> ch(n);
-    vector <char> num(n);
-    for (int i=0; i<n; i++) {
-        cin >> ch[i];
-        num[i] = ch[i];
+    int t;
+    cin >> t;
+    for (; t>0; t--) {  
+        int n;
+        cin >> n;
+        stack <char> ch;
+        for (int i=0; i<n; i++) {
+            char temp;
+            cin >> temp;
+            if (!ch.empty() && temp == ch.top()) 
+                ch.pop();
+            else 
+                ch.push(temp);
+            
+        }
+        
+        if (ch.empty())
+            cout << "YES" << endl;
+        else
+            cout << "NO" << endl;
     }
-    for (int i=0; i<n; i++)
+
+    return 0;
 
 
 }

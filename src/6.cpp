@@ -3,10 +3,10 @@
 using namespace std;
 int main ()
 {
-	int a, b, c;
-	cin >> a >> b >> c;
-	printf ("%8d %8d %8d", a, b, c);
-	
+	float x;
+	double y;
+
+	printf ("%d %d\n", sizeof(x), sizeof(y));
 	return 0;
 	
 }

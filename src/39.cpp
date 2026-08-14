@@ -1,12 +1,8 @@
-/*写出函数中缺失的部分，使得函数返回值为一个整数,该整数的左边i位是n的左边i位取反，其余位和n相同
-请使用【一行代码】补全bitManipulation3函数使得程序能达到上述的功能*/
-
 #include <iostream>
 using namespace std;
 
 int bitManipulation3(int n, int i) {
     return n ^ ((-1)>>(32-i)<<(32-i));
-    //return n ^ ~(~(unsigned)0 >> i);
 }
 
 int main() {
@@ -18,5 +14,3 @@ int main() {
 	}
 	return 0;
 }
-
-//相信自己,敢于创新,探索一切可能;

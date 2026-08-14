@@ -3,9 +3,9 @@
 using namespace std;
 int main ()
 {
-	int a, b, c;
-	cin >> a >> b >> c;
-	printf ("%8d %8d %8d", a, b, c);
+	double a;
+	cin >> a;
+	printf ("%.12lf", a);
 	
 	return 0;
 	
